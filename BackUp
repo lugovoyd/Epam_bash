@@ -1,0 +1,21 @@
+#!/bin/bash
+dir1=/home/student/MyDir/
+dir2=/home/student/BackUp/
+
+#или параметры
+#dir1=$1
+#dir2=$2
+
+#>All to log
+exec 1>>/home/student/log.txt
+#Print data
+date
+echo RemoveFile
+echo
+diff -r $dir1 $dir2 | grep $dir2 | awk '{print $4}' 
+echo
+echo NewFile
+echo
+diff -r $dir1 $dir2 | grep $dir1 | awk '{print $4}'
+
+rsync -r --delete $dir1 $dir2
